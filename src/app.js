@@ -26,14 +26,14 @@ const initPlayers = (players) => {
     let detailedPlayers = [];
     // Create players using for loop
     // Type your code here
-    for(let i = 0 ; i < PLAYERS.length ; i++ ){
-        let playerinfo = {
-            nameofplayer:PLAYERS[i],
-            strengthofplayer:getRandomStrength(),
-            imageofplayer:"images/super-"+(i+1)+".png",
-            typeofplayer: i % 2 === 0 ? "hero" : "villain"
+    for (let i = 0;i < PLAYERS.length;i++){
+        let player_info = {
+            player_name:PLAYERS[i],
+            player_image:`images/super-${i + 1}.png`,
+            player_strength:getRandomStrength(),
+            player_type:i % 2 === 0 ? "hero" : "villain"
         };
-        detailedPlayers.push(playerinfo);
+        detailedPlayers.push(player_info);
     }
     return detailedPlayers;
 }
@@ -42,7 +42,7 @@ const initPlayers = (players) => {
 const getRandomStrength = () => {
     // Return a random integer (0,100]
     // Note: You can use Math.random() and Math.ceil()
-    return Math.floor(Math.random()*100)
+    return Math.floor(Math.random()*100);
 }
 
 const buildPlayers = (players, type) => {
@@ -51,9 +51,13 @@ const buildPlayers = (players, type) => {
     // Loop through players and accumulate HTML template
     // depending of type of player(hero|villain)
     // Type your code here
-    for(let i = 0 ; i < players.length; i++){
-        if (players[i].typeofplayer === type ){
-            fragment += `<div class="player"><img src="${players[i].imageofplayer}"><h2>${players[i].nameofplayer}</h2><p>Strength:${players[i].strengthofplayer}</p></div>`
+    for (let i = 0; i < players.length; i++) {
+        if (players[i].player_type === type) {
+            fragment += `<div class="player">
+                            <img src="${players[i].player_image}" alt="${players[i].player_name}">
+                            <div class="name">${players[i].player_name}</div>
+                            <div class="strength">${players[i].player_strength}</div>
+                         </div>`;
         }
     }
     return fragment;
